@@ -7,6 +7,7 @@ using UnityEngine.Video;
 public class Click_dialogue : MonoBehaviour
 {
     public GameObject go;
+    public GameObject fleche;
     public bool isTalking = false;
     public GameObject IntdialogueUI;
     public GameObject BiblioClicUI;
@@ -27,6 +28,7 @@ public class Click_dialogue : MonoBehaviour
     {
         IntdialogueUI.SetActive(false);
         BiblioClicUI.SetActive(false);
+        fleche.SetActive(true);
         isTalking = false;
 
 
@@ -42,6 +44,7 @@ public class Click_dialogue : MonoBehaviour
                 if (hit.transform.gameObject.tag == "Vendeur")
                 {
                     BiblioClicUI.SetActive(true);
+                    fleche.SetActive(false);
 
                 }
 
@@ -65,6 +68,7 @@ public class Click_dialogue : MonoBehaviour
         else
         {
             BiblioClicUI.SetActive(false);
+            fleche.SetActive(true);
 
         }
 

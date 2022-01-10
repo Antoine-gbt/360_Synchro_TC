@@ -108,10 +108,12 @@ public class Choixvendeur_emprunt : MonoBehaviour
     {
         ChoiceMade = -1;
         Panel_Bouton.SetActive(false);
-        Video.GetComponent<VideoPlayer>().clip = videoClips[7];
-        yield return new WaitForSeconds(5);
-        Panel_Bouton.SetActive(true);
+        Video.GetComponent<VideoPlayer>().clip = videoClips[13];
+        yield return new WaitForSeconds(9);
+        StartCoroutine(enddialogue());
+        Curseur.SetActive(true);
         IntdialogueUI.SetActive(true);
+
     }
 
     IEnumerator rendre_avant_nouveau()
@@ -190,11 +192,11 @@ public class Choixvendeur_emprunt : MonoBehaviour
         Choix1.SetActive(true);
         Choix2.SetActive(true);
         Choix3.SetActive(true);
-        TextBouton1.GetComponent<TextMeshProUGUI>().text = "Non, aurevoir, bonne journée";// choix 10
+        TextBouton1.GetComponent<TextMeshProUGUI>().text = "Rien merci, bonne journée";// choix 10
         TextBouton2.GetComponent<TextMeshProUGUI>().text = "Je voudrais rendre un livre";// choix 7
-        TextBouton3.GetComponent<TextMeshProUGUI>().text = "Tenez, le voilà";//choix 11
+        TextBouton3.GetComponent<TextMeshProUGUI>().text = "Je souhaiterai emprunter un nouveau livre";//choix 11
         Video.GetComponent<VideoPlayer>().clip = videoClips[12];
-        yield return new WaitForSeconds(4);
+        yield return new WaitForSeconds(7);
         Panel_Bouton.SetActive(true);
         IntdialogueUI.SetActive(true);
 
@@ -211,7 +213,7 @@ public class Choixvendeur_emprunt : MonoBehaviour
         TextBouton1.GetComponent<TextMeshProUGUI>().text = " Oui, voici";// choix 12
         TextBouton2.GetComponent<TextMeshProUGUI>().text = "Je ne veux pas emprunter de livre finalement, bonne journée "; // choix 10
         TextBouton3.GetComponent<TextMeshProUGUI>().text = "Bonjour, vous allez bien"; // choix 7
-        Video.GetComponent<VideoPlayer>().clip = videoClips[13];
+        Video.GetComponent<VideoPlayer>().clip = videoClips[7];
         yield return new WaitForSeconds(4);
         Panel_Bouton.SetActive(true);
         IntdialogueUI.SetActive(true);
@@ -279,7 +281,7 @@ public class Choixvendeur_emprunt : MonoBehaviour
             ChoiceMade = 12;
             IntdialogueUI.SetActive(false);
             Panel_Bouton.SetActive(false);
-            TextBox.GetComponent<TextMeshProUGUI>().text = " ajouter dialogue ";
+            TextBox.GetComponent<TextMeshProUGUI>().text = " Deux, petite seconde... C'est bon vous pouvez y aller, bonne journée ! ";
 
         }
     }
@@ -365,10 +367,10 @@ public class Choixvendeur_emprunt : MonoBehaviour
         }
         if (Phase == 4)
         {
-            ChoiceMade = 12;
+            ChoiceMade = 11;
             IntdialogueUI.SetActive(false);
             Panel_Bouton.SetActive(false);
-            TextBox.GetComponent<TextMeshProUGUI>().text = " D'accord c'est le livre que vous avez emprunter? C'est bon pour moi , aurevoir! "; //ok
+            TextBox.GetComponent<TextMeshProUGUI>().text = " D'accord donnez moi le livre que vous voulez emprunter! "; //ok
 
         }
         if (Phase == 5)
@@ -456,7 +458,6 @@ public class Choixvendeur_emprunt : MonoBehaviour
         if (ChoiceMade == 12)//rend livre que puis je faire d'autre pour vous?
         {
             StartCoroutine(emprunt_livre());
-
 
         }
 
