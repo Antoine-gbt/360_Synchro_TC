@@ -34,21 +34,18 @@ public class Choixvendeur_classement : MonoBehaviour
     {
         ChoiceMade = -1;
         Panel_Bouton.SetActive(false);
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(1);
         IntdialogueUI.SetActive(false);
         Vendeur.SetActive(false);
         Camera.GetComponent<Click_dialogue>().enabled = true;
-        Camera.GetComponent<Camerapourmouvement>().enabled = true;
-        Video.GetComponent<VideoPlayer>().clip = videoClips[10];
-        Video.GetComponent<VideoPlayer>().isLooping = true;
-
+        Camera.GetComponent<Camerapourmouvement>().enabled = true;       
 
     }
     IEnumerator Merci_aurevoir()
     {
         ChoiceMade = -1;
         Panel_Bouton.SetActive(false);
-        Video.GetComponent<VideoPlayer>().clip = videoClips[8];
+        Video.GetComponent<VideoPlayer>().clip = videoClips[1];
         yield return new WaitForSeconds(3);
         StartCoroutine(enddialogue());
         Curseur.SetActive(true);
@@ -58,7 +55,7 @@ public class Choixvendeur_classement : MonoBehaviour
     {
         ChoiceMade = -1;
         Panel_Bouton.SetActive(false);
-        Video.GetComponent<VideoPlayer>().clip = videoClips[6];
+        Video.GetComponent<VideoPlayer>().clip = videoClips[2];
         yield return new WaitForSeconds(3);
         StartCoroutine(enddialogue());
         Curseur.SetActive(true);
@@ -69,15 +66,16 @@ public class Choixvendeur_classement : MonoBehaviour
     {
         ChoiceMade = -1;
         IntdialogueUI.SetActive(false);
+        Video.GetComponent<VideoPlayer>().clip = videoClips[3];
+        yield return new WaitForSeconds(13);
         Classement_livre_canvas.SetActive(true);
-        yield return new WaitForSeconds(3);
     }
 
     IEnumerator adhérent_toilette()
     {
         ChoiceMade = -1;
         Panel_Bouton.SetActive(false);
-        Video.GetComponent<VideoPlayer>().clip = videoClips[1];
+        Video.GetComponent<VideoPlayer>().clip = videoClips[0];
         yield return new WaitForSeconds(5);
         Panel_Bouton.SetActive(true);
         IntdialogueUI.SetActive(true);
@@ -104,7 +102,7 @@ public class Choixvendeur_classement : MonoBehaviour
             ChoiceMade = 2;
             IntdialogueUI.SetActive(false);
             Panel_Bouton.SetActive(false);
-            TextBox.GetComponent<TextMeshProUGUI>().text = " Très bien avez vous votre carte de la bibliothèque s'il vous plait?";
+            TextBox.GetComponent<TextMeshProUGUI>().text = " Ho! Ecoutez, pas de soucis. Par contre, veuillez à bien les trier dans l'ordre croissant par nom d'auteur s'il vous plait. Je vous les donnes, tenez! ";
         }
     }
     public void ChoiceOption3()
@@ -114,7 +112,7 @@ public class Choixvendeur_classement : MonoBehaviour
             ChoiceMade = 3;
             IntdialogueUI.SetActive(false);
             Panel_Bouton.SetActive(false);
-            TextBox.GetComponent<TextMeshProUGUI>().text = " Malheureusement, avant d'emprunter un nouveau livre, il faut que vous ramenier celui que vous avez chez vous, s'il vous plait.(choisissez une autre réponse)";
+            TextBox.GetComponent<TextMeshProUGUI>().text = " Désolé, je n'ai pas bien compris... Aurevoir... ";
         }
     }
 
@@ -124,6 +122,7 @@ public class Choixvendeur_classement : MonoBehaviour
         TextBouton1.GetComponent<TextMeshProUGUI>().text = "Pouvez-vous me dire ou se trouvent les toilettes?";
         TextBouton2.GetComponent<TextMeshProUGUI>().text = "Je souhaiterais ranger des livres ";
         TextBouton3.GetComponent<TextMeshProUGUI>().text = " Je veux emprunter un livre";
+        Phase = 0;
 
     }
     // Update is called once per frame
@@ -131,21 +130,25 @@ public class Choixvendeur_classement : MonoBehaviour
     {
         if (ChoiceMade == 1)//toilette
         {
+            ChoiceMade = 0;
             Choix1.SetActive(false);
             StartCoroutine(adhérent_toilette());
+            
 
 
         }
         if (ChoiceMade == 2)// rendre un livre 
         {
-
+            ChoiceMade = 0;
             StartCoroutine(Classement_livre());
+            ChoiceMade = 0;
 
         }
         if (ChoiceMade == 3)// impossible de prendre un livre sans donner l'ancien
         {
-            Choix3.SetActive(false);
+            ChoiceMade = 0;
             StartCoroutine(hein_aurevoir());
+            
 
         }
     }

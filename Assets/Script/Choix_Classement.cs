@@ -10,8 +10,15 @@ public class Choix_Classement : MonoBehaviour
 {
     public GameObject Camera;
     public GameObject Canvas_Classement_Livre;
+    public GameObject UIdialogue;
+    public GameObject TextBox;
+    public GameObject Vendeur;
+    
 
     public GameObject Valider;
+    public VideoClip[] videoClips;
+    public GameObject Video;
+
 
     public GameObject Curseur;
 
@@ -47,15 +54,17 @@ public class Choix_Classement : MonoBehaviour
     public Text TextPosition8;
     public Text TextPosition9;
     public Text TextPosition10;
+    public Text tentative;
 
     private bool onclic;
-
+    private int essai;
 
     private int position_actuelle;
     private GameObject position;
     private Text Textposition;
     private int Choix;
     private bool position_use;
+    private bool reussite;
 
 
 
@@ -81,9 +90,13 @@ public class Choix_Classement : MonoBehaviour
         Canvas_Classement_Livre.SetActive(true);
         position_actuelle = 0;
         Choix = 0;
-
+        essai = 0;
+        tentative.GetComponent<Text>().text = " Nombre de tentative : 3";
+        reussite = false;
 
     }
+
+
 
     public void verif_position_actuelle()
     {
@@ -96,9 +109,8 @@ public class Choix_Classement : MonoBehaviour
                 position.GetComponent<Button>().enabled = true;
                 position.GetComponent<Image>().color = new Color32(255, 255, 255, 255);
                 onclic = false;
-
-
             }
+
             if (position_actuelle == 2)
             {
                 position = Position2;
@@ -307,13 +319,58 @@ public class Choix_Classement : MonoBehaviour
         {
             Valider.SetActive(false);
         }
-
-
     }
 
     public void fin_classement()
     {
-        Canvas_Classement_Livre.SetActive(false);
+
+        if (TextPosition1.text == "A" && TextPosition2.text == "C" && TextPosition3.text == "D" && TextPosition4.text == "H" && TextPosition5.text == "K" && TextPosition6.text == "P" && TextPosition7.text == "R" && TextPosition8.text == "S" && TextPosition9.text == "T" && TextPosition10.text == "Z")
+        {
+            reussite = true;
+        }
+        else { 
+            reussite = false;
+        }
+
+        if (essai == 2 && reussite == false)
+        {
+            Canvas_Classement_Livre.SetActive(false);
+            Vendeur.SetActive(false);
+            Video.GetComponent<VideoPlayer>().clip = videoClips[0];
+            Curseur.SetActive(true);
+            Camera.GetComponent<Click_dialogue>().enabled = true;
+            Camera.GetComponent<Camerapourmouvement>().enabled = true;
+        }
+
+        if (essai == 1 && reussite == false)
+        {
+            essai = 2;
+            tentative.GetComponent<Text>().text = "Nombre de tentative : 1";
+        }
+        if (essai == 0 && reussite == false)
+        {
+            essai = 1;
+            tentative.GetComponent<Text>().text = "Nombre de tentative : 2";
+            
+
+        }
+
+
+
+        if (reussite == true)
+        {
+            Canvas_Classement_Livre.SetActive(false);
+            Vendeur.SetActive(false);
+            Video.GetComponent<VideoPlayer>().clip = videoClips[0];
+            Curseur.SetActive(true);
+            Camera.GetComponent<Click_dialogue>().enabled = true;
+            Camera.GetComponent<Camerapourmouvement>().enabled = true;
+        }
+        
+                            
+
+        
+
     }
 
 
@@ -397,8 +454,6 @@ public class Choix_Classement : MonoBehaviour
             position_actuelle = position_actuelle - 1;
             onclic = true;
             verif_position_actuelle();
-            Debug.Log(position_actuelle);
-
         }
 
 
